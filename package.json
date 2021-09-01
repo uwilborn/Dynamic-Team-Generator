@@ -4,7 +4,9 @@
   "description": "Team Profile Assignment",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index",
+    "watch": "nodemon index",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -21,8 +23,5 @@
   "homepage": "https://github.com/uwilborn/Dynamic-Team-Generator#readme",
   "dependencies": {
     "inquirer": "^8.1.2"
-  },
-  "devDependencies": {
-    "jest": "^27.0.6"
   }
 }

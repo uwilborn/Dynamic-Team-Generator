@@ -1,6 +1,6 @@
-const Letter = require("../lib/Manager");
+const intern = require("../lib/Intern");
 
-describe("Letter class", () => {
+describe("intern class", () => {
   it("Characters that aren't digits or letters are instantly visible", () => {
     expect(new Letter("?").visible).toBe(true);
   });

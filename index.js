@@ -1,22 +1,24 @@
 const inquirer = require("inquirer");
-const manager = require("./lib/Manager");
-const engineer = require("./lib/Engineer");
-const intern = require("./lib/Intern");
-
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
+var myManagerList = [];
+var myEngineerList = [];
+var myInternList = [];
 
 
 askForMember()
 // Prompts the user for team member information
 function askForMember() {
-inquirer.prompt([
-  {
-    type: "list",
-    name: "userchoice",
-    choices: ["add manager", "add engineer", "add intern", "exit" ],
-    message: "Which would you like to add?",
-  }
-]).then (response => {
-  switch( response.userchoice){
+  inquirer.prompt([
+    {
+      type: "list",
+      name: "userchoice",
+      choices: ["add manager", "add engineer", "add intern", "exit"],
+      message: "Which would you like to add?",
+    }
+  ]).then(response => {
+    switch (response.userchoice) {
       case "add manager":
         addManager();
         break;
@@ -29,24 +31,56 @@ inquirer.prompt([
       case "exit":
         generateFile();
         break;
-        
-  }
-})
+
+    }
+  })
 }
 
-function addManager(){
+function addManager() {
   console.log("Add Manager")
   console.log("------------")
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "memberid",
+        message: "What is the team member's id?",
+
+      },
+      {
+        type: "input",
+        name: "membername",
+        message: "What is the team member's name?",
+
+      },
+      {
+        type: "input",
+        name: "memberemail",
+        message: "What is the team member's email address?",
+
+      },
+      {
+        type: "input",
+        name: "officenumber",
+        message: "What is the team member's office number?",
+
+      },
+    ]).then(function (userdata) {
+      var myManager = new Manager(userdata.membername, userdata.memberid, userdata.memberemail, userdata.officenumber)
+      myManagerList.push(myManager);
+      askForMember();
+    })
+
 }
-function addEngineer(){
+function addEngineer() {
   console.log("Add Engineer")
   console.log("------------")
 }
-function addIntern(){
+function addIntern() {
   console.log("Add Intern")
   console.log("------------")
 }
-function generateFile(){
+function generateFile() {
   console.log("exit")
   console.log("------------")
 }
@@ -58,29 +92,8 @@ function generateFile(){
 
 
 // }
-//      inquirer
-//       .prompt([
-//         {
-//           type: "input",
-//           name: "memberid",
-//           message: "What is the team member's id?",
-//           // The users input must be a string
-//           validate: val => /[a-z1-9]/gi.test(val),          
-//         }
-//         {
-//           type: "input",
-//           name: "membername",
-//           message: "What is the team member's name?",
-//           // The users guess must be a number or letter
-//           validate: val => /[a-z1-9]/gi.test(val),          
-//         }
-//         {
-//           type: "input",
-//           name: "memberemail",
-//           message: "What is the team member's email address?",
-//           // The users guess must be a number or letter
-//           validate: val => /[a-z1-9]/gi.test(val), 
-          
+
+
 //           // if (!name.match(nameregex)) {
 //           //   alert('Enter Valid Name!!');
 

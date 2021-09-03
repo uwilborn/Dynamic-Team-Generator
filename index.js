@@ -158,12 +158,21 @@ function generateFile() {
     <title>TEAM Member from Class</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 </head>
-<body>`
-  var closeHtml = `</body>
+<body>
+<header class="bg-primary text-center jumbotoron">
+    <h1>Employee Directory</h1>
+    <p>By: Ursula Wilborn</p>
+  </header>
+  <main class="container d-flex flex-wrap space-between">
+`
+  var closeHtml = `
+  </main>
+  </body>
 </html>`
+console.log(myManagerList,myEngineerList,myInternList)
   var managerhtml = "";
   for (let i = 0; i < myManagerList.length; i++) {
-    managerhtml += `<div class="card bg-primary text-center" style="width: 18rem;">
+    managerhtml += `<div class="card bg-primary text-center m-5 p-5" style="width: 20rem;">
   
   <div class="card-body">
     <h5 class="card-title">${myManagerList[i].name}</h5>
@@ -174,11 +183,10 @@ function generateFile() {
   </div>
 </div>`
     //Copy from 97-108 and change for engineer and intern
-    var closeHtml = `</body>
-</html>`
+   
     var engineerhtml = "";
     for (let i = 0; i < myEngineerList.length; i++) {
-              engineerhtml += `<div class="card bg-primary text-center" style="width: 18rem;">
+              engineerhtml += `<div class="card bg-warning text-center m-5 p-5" style="width: 20rem;">
           
           <div class="card-body">
             <h5 class="card-title">${myEngineerList[i].name}</h5>
@@ -190,11 +198,10 @@ function generateFile() {
         </div>`
     }
 
-    var closeHtml = `</body>
-</html>`
+  
     var internhtml = "";
     for (let i = 0; i < myInternList.length; i++) {
-            internhtml += `<div class="card bg-primary text-center" style="width: 18rem;">
+            internhtml += `<div class="card bg-success text-center m-5 p-5" style="width: 20rem;">
         
         <div class="card-body">
           <h5 class="card-title">${myInternList[i].name}</h5>
@@ -207,9 +214,10 @@ function generateFile() {
     }
 
     var HTMLCODE = beginning + managerhtml + engineerhtml + internhtml + closeHtml
-    fs.writeFileSync("./main.html", HTMLCODE, (err, data) => {
+    console.log("HTML code",HTMLCODE)
+    fs.writeFile("./main.html", HTMLCODE, (err, data) => {
       if (err) throw err;
-      console.log("HTML generates")
+      console.log("HTML generates",HTMLCODE,data)
     })
   }
 }

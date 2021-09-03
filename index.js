@@ -76,15 +76,80 @@ function addManager() {
 function addEngineer() {
   console.log("Add Engineer")
   console.log("------------")
+
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "memberid",
+        message: "What is the team member's id?",
+
+      },
+      {
+        type: "input",
+        name: "membername",
+        message: "What is the team member's name?",
+
+      },
+      {
+        type: "input",
+        name: "memberemail",
+        message: "What is the team member's email address?",
+
+      },
+      {
+        type: "input",
+        name: "github",
+        message: "What is the team member's github?",
+
+      },
+    ]).then(function (userdata) {
+      var myEngineer = new Engineer(userdata.membername, userdata.memberid, userdata.memberemail, userdata.github)
+      myEngineerList.push(myEngineer);
+      askForMember();
+    })
 }
 function addIntern() {
   console.log("Add Intern")
   console.log("------------")
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "memberid",
+        message: "What is the team member's id?",
+
+      },
+      {
+        type: "input",
+        name: "membername",
+        message: "What is the team member's name?",
+
+      },
+      {
+        type: "input",
+        name: "memberemail",
+        message: "What is the team member's email address?",
+
+      },
+      {
+        type: "input",
+        name: "school",
+        message: "What is the team member's school?",
+
+      },
+    ]).then(function (userdata) {
+      var myIntern = new Intern(userdata.membername, userdata.memberid, userdata.memberemail, userdata.school)
+      myInternList.push(myIntern);
+      askForMember();
+    })
 }
+
+
 function generateFile() {
   console.log("exit")
   console.log("------------")
-var beginning = `<!DOCTYPE html>
+  var beginning = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -94,11 +159,11 @@ var beginning = `<!DOCTYPE html>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 </head>
 <body>`
-var closeHtml = `</body>
+  var closeHtml = `</body>
 </html>`
-var managerhtml = "";
-for(let i=0;i<myManagerList.length;i++){
-  managerhtml+=`<div class="card bg-primary text-center" style="width: 18rem;">
+  var managerhtml = "";
+  for (let i = 0; i < myManagerList.length; i++) {
+    managerhtml += `<div class="card bg-primary text-center" style="width: 18rem;">
   
   <div class="card-body">
     <h5 class="card-title">${myManagerList[i].name}</h5>
@@ -108,13 +173,45 @@ for(let i=0;i<myManagerList.length;i++){
     <p class="card-text">Email: ${myManagerList[i].email}</p>
   </div>
 </div>`
-//Copy from 97-108 and change for engineer and intern
-var HTMLCODE = beginning+managerhtml+closeHtml
-fs.writeFileSync("./main.html",HTMLCODE, (err,data) => {
-  if(err) throw err;
-  console.log("HTML generates")
-})
-}
+    //Copy from 97-108 and change for engineer and intern
+    var closeHtml = `</body>
+</html>`
+    var engineerhtml = "";
+    for (let i = 0; i < myEngineerList.length; i++) {
+              engineerhtml += `<div class="card bg-primary text-center" style="width: 18rem;">
+          
+          <div class="card-body">
+            <h5 class="card-title">${myEngineerList[i].name}</h5>
+            <h6 class="card-title">Engineer</h6>
+            <p class="card-text">ID: ${myEngineerList[i].id}</p>
+            <p class="card-text">Github: ${myEngineerList[i].github}</p>
+            <p class="card-text">Email: ${myEngineerList[i].email}</p>
+          </div>
+        </div>`
+    }
+
+    var closeHtml = `</body>
+</html>`
+    var internhtml = "";
+    for (let i = 0; i < myInternList.length; i++) {
+            internhtml += `<div class="card bg-primary text-center" style="width: 18rem;">
+        
+        <div class="card-body">
+          <h5 class="card-title">${myInternList[i].name}</h5>
+          <h6 class="card-title">Intern</h6>
+          <p class="card-text">ID: ${myInternList[i].id}</p>
+          <p class="card-text">School: ${myInternList[i].school}</p>
+          <p class="card-text">Email: ${myInternList[i].email}</p>
+        </div>
+      </div>`
+    }
+
+    var HTMLCODE = beginning + managerhtml + engineerhtml + internhtml + closeHtml
+    fs.writeFileSync("./main.html", HTMLCODE, (err, data) => {
+      if (err) throw err;
+      console.log("HTML generates")
+    })
+  }
 }
 
 

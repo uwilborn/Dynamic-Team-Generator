@@ -1,5 +1,5 @@
 const Employee = require("../lib/Employee");
-const employee = require("../lib/Employee");
+
 
 
 test("Initiate employee instance",() => {

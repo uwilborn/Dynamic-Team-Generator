@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index",
     "watch": "nodemon index",
-    "test": "jest"
+    "test": "jest --verbose test/*"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/uwilborn/Dynamic-Team-Generator#readme",
   "dependencies": {
-    "inquirer": "^8.1.2"
+    "inquirer": "^8.1.2",
+    "jest": "^27.1.0"
   }
 }

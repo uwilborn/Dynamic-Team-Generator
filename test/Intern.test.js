@@ -1,27 +1,30 @@
-const intern = require("../lib/Intern");
+const Intern = require("../lib/Intern");
 
-describe("intern class", () => {
-  it("Characters that aren't digits or letters are instantly visible", () => {
-    expect(new Letter("?").visible).toBe(true);
-  });
-
-  it("toString returns _ for letters", () => {
-    expect(new Letter("a").toString()).toBe("_");
-  });
-
-  describe("guess", () => {
-    it("Correct guess returns true", () => {
-      expect(new Letter("j").guess("j")).toBe(true);
-    });
-
-    it("Incorrect guess returns false", () => {
-      expect(new Letter("j").guess("l")).toBe(false);
-    });
-  });
-
-  describe("getSolution", () => {
-    it("returns character", () => {
-      expect(new Letter("l").getSolution()).toBe("l");
-    });
-  });
-});
+test("Initiate intern instance",() => {
+  const myIntern = new Intern;
+  expect(typeof(myIntern)).toBe("object")
+})
+test("Intern Name checking",() => {
+  const myIntern = new Intern("Ursula");
+  expect(myIntern.name).toBe("Ursula")
+})
+test("ID checking",() => {
+  const myIntern = new Intern("Ursula",45);
+  expect(myIntern.id).toBe(45)
+})
+test("Email checking",() => {
+  const myIntern = new Intern("Ursula",45,"ursula@yahoo.com");
+  expect(myIntern.email).toBe("ursula@yahoo.com")
+})
+test("School checking",() => {
+  const myIntern = new Intern("Ursula",45,"ursula@yahoo.com","Georgia University");
+  expect(myIntern.school).toBe("Georgia University")
+})
+test("Check School Function",() => {
+  const myIntern = new Intern("Ursula",45,"ursula@yahoo.com","Georgia University");
+  expect(myIntern.getSchool()).toBe("Georgia University")
+})
+test("Check Role Function",() => {
+  const myIntern = new Intern("Ursula",45,"ursula@yahoo.com","Georgia University");
+  expect(myIntern.getRole()).toBe("Intern")
+})

@@ -1,27 +1,31 @@
-const Letter = require("../lib/Manager");
+const Engineer = require("../lib/Engineer");
 
-describe("Letter class", () => {
-  it("Characters that aren't digits or letters are instantly visible", () => {
-    expect(new Letter("?").visible).toBe(true);
-  });
+test("Initiate Engineer instance",() => {
+  const myEngineer = new Engineer;
+  expect(typeof(myEngineer)).toBe("object")
+})
+test("Engineer Name checking",() => {
+  const myEngineer = new Engineer("Ursula");
+  expect(myEngineer.name).toBe("Ursula")
+})
+test("ID checking",() => {
+  const myEngineer = new Engineer("Ursula",45);
+  expect(myEngineer.id).toBe(45)
+})
+test("Email checking",() => {
+  const myEngineer = new Engineer("Ursula",45,"ursula@yahoo.com");
+  expect(myEngineer.email).toBe("ursula@yahoo.com")
+})
+test("Github checking",() => {
+  const myEngineer = new Engineer("Ursula",45,"ursula@yahoo.com","github@github.com");
+  expect(myEngineer.github).toBe("github@github.com")
+})
+test("Check Github Function",() => {
+  const myEngineer = new Engineer("Ursula",45,"ursula@yahoo.com","github@github.com");
+  expect(myEngineer.getGithub()).toBe("github@github.com")
+})
+test("Check Role Function",() => {
+  const myEngineer = new Engineer("Ursula",45,"ursula@yahoo.com","github@github.com");
+  expect(myEngineer.getRole()).toBe("Engineer")
+})
 
-  it("toString returns _ for letters", () => {
-    expect(new Letter("a").toString()).toBe("_");
-  });
-
-  describe("guess", () => {
-    it("Correct guess returns true", () => {
-      expect(new Letter("j").guess("j")).toBe(true);
-    });
-
-    it("Incorrect guess returns false", () => {
-      expect(new Letter("j").guess("l")).toBe(false);
-    });
-  });
-
-  describe("getSolution", () => {
-    it("returns character", () => {
-      expect(new Letter("l").getSolution()).toBe("l");
-    });
-  });
-});
